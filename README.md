@@ -4,4 +4,6 @@ A single-file browser game. No build step or dependencies.
 
 ## Play
 
-Open `ariel_melody_game.html` in any modern browser (desktop or mobile).
+Online: https://dcsanti.github.io/melody/
+
+Locally: open `index.html` in any modern browser (desktop or mobile).
