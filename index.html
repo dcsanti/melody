@@ -2,56 +2,64 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Ariel & Baby Melody — Royal Nursery & Coral Ocean</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ariel & Baby Melody — Velvety Gouache Storybook</title>
 <style>
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-  body { margin: 0; background: #131417; color: #f3f4f6; display: flex; justify-content: center; padding: 12px; }
-  .app { width: 100%; max-width: 820px; background: #1e1f22; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid #2e3036; }
+  * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  body { margin: 0; background: #121318; color: #f8fafc; display: flex; justify-content: center; padding: 16px; }
+  .app { width: 100%; max-width: 860px; background: #1b1d24; border-radius: 22px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.6); border: 1px solid #2e323f; }
 
-  .stage { position: relative; width: 100%; height: 340px; overflow: hidden; transition: filter 0.6s ease, background 0.6s ease; }
-  .stage.ocean { background: linear-gradient(180deg, #0d526b 0%, #178896 55%, #22b59b 100%); }
-  .stage.nursery { background: linear-gradient(180deg, #fce7f3 0%, #ede9fe 60%, #e0e7ff 100%); }
-  .stage.lights-off.ocean { background: linear-gradient(180deg, #041322 0%, #09263a 60%, #0d3b4c 100%); }
+  .stage { position: relative; width: 100%; height: 370px; overflow: hidden; transition: background 0.6s ease; }
+  .stage.ocean { background: radial-gradient(circle at 30% 20%, #1e88a8 0%, #0e5a78 55%, #083344 100%); }
+  .stage.nursery { background: linear-gradient(180deg, #fdf2f8 0%, #f3e8ff 60%, #e0e7ff 100%); }
+  .stage.garden { background: linear-gradient(180deg, #bae6fd 0%, #dcfce7 65%, #bbf7d0 100%); }
+  .stage.lights-off.ocean { background: linear-gradient(180deg, #030e1a 0%, #071e30 60%, #0b2d42 100%); }
   .stage.lights-off.nursery { background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 65%, #312e81 100%); }
+  .stage.lights-off.garden { background: linear-gradient(180deg, #091526 0%, #102a2e 65%, #14362b 100%); }
 
-  .night-overlay { position: absolute; inset: 0; background: rgba(6, 10, 28, 0.42); pointer-events: none; opacity: 0; transition: opacity 0.6s ease; }
+  .night-overlay { position: absolute; inset: 0; background: rgba(5, 8, 22, 0.42); pointer-events: none; opacity: 0; transition: opacity 0.6s ease; }
   .stage.lights-off .night-overlay { opacity: 1; }
 
-  .top-controls { position: absolute; top: 14px; right: 14px; display: flex; gap: 10px; z-index: 20; }
-  .circle-btn { width: 42px; height: 42px; border-radius: 50%; border: none; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: transform 0.15s; }
-  .circle-btn:active { transform: scale(0.92); }
+  .top-left-controls { position: absolute; top: 14px; left: 14px; display: flex; flex-wrap: wrap; gap: 8px; z-index: 20; }
+  .top-controls { position: absolute; top: 14px; right: 14px; display: flex; gap: 8px; z-index: 20; }
+  .circle-btn { width: 42px; height: 42px; border-radius: 50%; border: none; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.35); }
   .btn-sound { background: #3b82f6; color: white; }
+  .btn-music { background: #ec4899; color: white; }
   .btn-lights { background: #312e81; color: #fde047; }
   .stage.lights-off .btn-lights { background: #facc15; color: #1e1b4b; }
 
   .speech-bubble {
-    position: absolute; top: 34px; left: 50%; transform: translateX(-50%);
-    background: #ffffff; color: #dc2626; font-weight: 900; font-size: 17px;
-    padding: 10px 18px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    z-index: 15; white-space: nowrap; animation: popBounce 0.6s infinite alternate;
+    position: absolute; top: 62px; left: 50%; transform: translateX(-50%);
+    background: #ffffff; color: #dc2626; font-weight: 900; font-size: 16px;
+    padding: 8px 18px; border-radius: 18px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    z-index: 15; white-space: nowrap; animation: popBounce 0.55s infinite alternate;
   }
   .speech-bubble::after {
-    content: ""; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
-    border-width: 10px 10px 0; border-style: solid; border-color: #ffffff transparent transparent;
+    content: ""; position: absolute; bottom: -9px; left: 50%; transform: translateX(-50%);
+    border-width: 9px 9px 0; border-style: solid; border-color: #ffffff transparent transparent;
   }
   @keyframes popBounce { from { transform: translateX(-50%) translateY(0); } to { transform: translateX(-50%) translateY(-5px); } }
 
-  .floating-fx { position: absolute; font-size: 24px; pointer-events: none; animation: floatUp 1.6s ease-out forwards; z-index: 18; }
+  .floating-fx { position: absolute; font-size: 26px; pointer-events: none; animation: floatUp 1.6s ease-out forwards; z-index: 18; }
   @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(0.8); } 100% { opacity: 0; transform: translateY(-75px) scale(1.3); } }
 
-  .status-bar { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; padding: 14px 10px; background: #1e1f22; border-bottom: 1px solid #2b2d31; }
-  .status-label { font-size: 12px; color: #9ca3af; margin-bottom: 4px; }
-  .status-val { font-size: 16px; font-weight: 800; }
+  .status-bar { display: grid; grid-template-columns: 1fr 1.5fr 1fr; align-items: center; text-align: center; padding: 12px 16px; background: #1b1d24; border-bottom: 1px solid #2b2e3a; gap: 12px; }
+  .status-label { font-size: 11px; color: #94a3b8; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .status-val { font-size: 15px; font-weight: 800; }
   .mood-happy { color: #34d399; }
   .mood-crying { color: #f87171; }
+  .mood-mad { color: #fb923c; }
   .mood-sleep { color: #a78bfa; }
 
-  .controls { padding: 14px 16px 20px; display: flex; flex-direction: column; gap: 12px; }
-  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-  .row-title { font-size: 13px; color: #9ca3af; font-weight: 600; margin-right: 4px; }
+  .happy-meter-wrap { width: 100%; background: #2b2e3a; height: 12px; border-radius: 999px; overflow: hidden; margin-top: 4px; }
+  .happy-meter-fill { height: 100%; width: 80%; background: linear-gradient(90deg, #f43f5e, #fbbf24, #10b981); transition: width 0.4s ease; }
 
-  button.pill { border: none; border-radius: 999px; padding: 9px 15px; font-size: 13px; font-weight: 700; cursor: pointer; color: #f3f4f6; background: #2b2d31; transition: transform 0.12s, opacity 0.2s; }
+  .controls { padding: 16px 18px 22px; display: flex; flex-direction: column; gap: 12px; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .row-title { font-size: 12px; color: #94a3b8; font-weight: 700; margin-right: 4px; }
+
+  button.pill { border: none; border-radius: 999px; padding: 9px 14px; font-size: 13px; font-weight: 700; cursor: pointer; color: #f8fafc; background: #2b2e3a; transition: transform 0.12s, filter 0.15s; }
+  button.pill:hover { filter: brightness(1.12); }
   button.pill:active { transform: scale(0.95); }
   .pill.active-blue { background: #3b82f6; color: #fff; }
   .pill.coral { background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; }
@@ -59,13 +67,14 @@
   .pill.purple { background: #9333ea; color: #fff; }
   .pill.pink { background: #ec4899; color: #fff; }
   .pill.red { background: #dc2626; color: #fff; }
+  .pill.emerald { background: #059669; color: #fff; }
   .pill.indigo { background: #4f46e5; color: #fff; }
 
-  .panel { background: #282a2f; border-radius: 14px; padding: 12px; border: 1px solid #34373e; }
-  .panel-title { font-size: 12px; color: #9ca3af; font-weight: 700; margin-bottom: 10px; }
-  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
-  .char-card { background: #32353b; border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
-  .char-name { font-weight: 800; font-size: 14px; }
+  .panel { background: #242731; border-radius: 14px; padding: 12px 14px; border: 1px solid #323644; }
+  .panel-title { font-size: 12px; color: #94a3b8; font-weight: 700; margin-bottom: 10px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .char-card { background: #2e323f; border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .char-name { font-weight: 800; font-size: 13px; }
   .char-btns { display: flex; gap: 6px; }
   .char-btns button { flex: 1; border: none; border-radius: 8px; padding: 7px; font-weight: 700; font-size: 12px; cursor: pointer; color: white; }
   .btn-call { background: #3b82f6; }
@@ -75,85 +84,184 @@
 <body>
 <div class="app">
   <div id="stage" class="stage ocean">
+    <div class="top-left-controls">
+      <button id="topNurseryBtn" class="pill" onclick="setLocation('nursery')">🏰 Palace Nursery</button>
+      <button id="topOceanBtn" class="pill active-blue" onclick="setLocation('ocean')">🌊 Coral Ocean</button>
+      <button id="topGardenBtn" class="pill" onclick="setLocation('garden')">🌸 Royal Garden</button>
+    </div>
+
     <div id="speechBubble" class="speech-bubble" style="display:none;">MAMA! WANT MAMA!!!</div>
 
     <div class="top-controls">
       <button id="lightsBtn" class="circle-btn btn-lights" title="Lights Off / On" onclick="toggleLights()">🌙</button>
-      <button id="soundBtn" class="circle-btn btn-sound" title="Sound On / Off" onclick="toggleSound()">🔊</button>
+      <button id="musicBtn" class="circle-btn btn-music" title="Stop / Play Happy Music" onclick="toggleMusic()">🎵</button>
+      <button id="soundBtn" class="circle-btn btn-sound" title="Sound On / Off" onclick="toggleSound()">🔇</button>
     </div>
 
-    <svg id="sceneSvg" viewBox="0 0 800 340" width="100%" height="100%">
+    <svg id="sceneSvg" viewBox="0 0 800 370" width="100%" height="100%">
+      <!-- Night Sky -->
       <g id="nightSky" opacity="0">
-        <circle cx="670" cy="58" r="24" fill="#fef08a" />
-        <circle cx="680" cy="52" r="20" fill="#09263a" />
-        <circle cx="110" cy="45" r="2.5" fill="#fff" />
-        <circle cx="210" cy="70" r="2" fill="#fff" />
-        <circle cx="340" cy="35" r="3" fill="#fef08a" />
-        <circle cx="480" cy="55" r="2.5" fill="#fff" />
-        <circle cx="560" cy="30" r="2" fill="#fff" />
+        <circle cx="695" cy="58" r="20" fill="#fef08a" />
+        <circle cx="704" cy="52" r="16" fill="#071e30" />
+        <circle cx="140" cy="75" r="2.5" fill="#fff" />
+        <circle cx="340" cy="45" r="3" fill="#fef08a" />
+        <circle cx="510" cy="55" r="2.5" fill="#fff" />
       </g>
 
+      <!-- Ocean Background -->
       <g id="oceanBg">
-        <g transform="translate(555, 36)">
-          <polygon points="0,48 16,6 32,48" fill="#1b3b4b" />
-          <polygon points="24,48 42,0 60,48" fill="#152e3c" />
-          <rect x="12" y="26" width="5" height="5" fill="#fbbf24" />
-          <rect x="20" y="26" width="5" height="5" fill="#fbbf24" />
+        <!-- Tiny Distant Royal Castle Kingdom on Horizon -->
+        <g id="distantCastle" transform="translate(615, 58)">
+          <rect x="8" y="34" width="54" height="22" rx="2" fill="#1e3a5f" />
+          <polygon points="4,34 15,10 26,34" fill="#2563eb" />
+          <polygon points="24,34 35,2 46,34" fill="#3b82f6" />
+          <polygon points="44,34 55,10 66,34" fill="#2563eb" />
+          <rect x="14" y="40" width="4" height="5" fill="#fde047" />
+          <rect x="33" y="38" width="5" height="6" fill="#fde047" />
+          <rect x="52" y="40" width="4" height="5" fill="#fde047" />
+          <text x="35" y="68" text-anchor="middle" fill="#bae6fd" font-size="10" font-weight="700">Royal Castle</text>
         </g>
-        <circle cx="140" cy="95" r="7" fill="rgba(255,255,255,0.22)" />
-        <circle cx="260" cy="65" r="5" fill="rgba(255,255,255,0.22)" />
-        <circle cx="430" cy="110" r="6" fill="rgba(255,255,255,0.2)" />
-        <circle cx="640" cy="190" r="8" fill="rgba(255,255,255,0.22)" />
-        <path d="M0,340 L0,285 Q220,235 460,295 T800,275 L800,340 Z" fill="#1d9b8f" />
-        <path d="M260,340 Q520,245 800,295 L800,340 Z" fill="#28c79d" />
+
+        <path d="M0,370 L0,305 Q220,255 460,315 T800,295 L800,370 Z" fill="#0d9488" />
+        <path d="M260,370 Q520,265 800,315 L800,370 Z" fill="#14b8a6" />
+
+        <!-- Secret Coral Hiding Spot -->
+        <g transform="translate(565, 235)">
+          <path d="M0,70 C-10,30 15,0 30,25 C45,-5 75,15 65,45 C85,35 95,65 80,70 Z" fill="#fb7185" />
+        </g>
       </g>
 
+      <!-- Palace Nursery Background -->
       <g id="nurseryBg" style="display:none;">
-        <rect x="0" y="265" width="800" height="75" fill="#d6a278" />
-        <path d="M180,265 L180,100 A70,70 0 0,1 320,100 L320,265 Z" fill="#e0f2fe" stroke="#cbd5e1" stroke-width="6" />
-        <path d="M480,265 L480,100 A70,70 0 0,1 620,100 L620,265 Z" fill="#e0f2fe" stroke="#cbd5e1" stroke-width="6" />
-        <g transform="translate(680, 225)">
-          <path d="M0,40 Q20,0 40,40 Z" fill="#f472b6" />
-          <circle id="nightlightGlow" cx="20" cy="24" r="26" fill="rgba(253, 224, 71, 0)" />
+        <rect x="0" y="290" width="800" height="80" fill="#d6a278" />
+        <path d="M160,290 L160,120 A70,70 0 0,1 300,120 L300,290 Z" fill="#e0f2fe" stroke="#cbd5e1" stroke-width="6" />
+        <path d="M470,290 L470,120 A70,70 0 0,1 610,120 L610,290 Z" fill="#e0f2fe" stroke="#cbd5e1" stroke-width="6" />
+        <!-- Royal Crib & Glowing Seashell Nightlight -->
+        <g transform="translate(510, 215)">
+          <rect x="0" y="25" width="110" height="50" rx="10" fill="#fbcfe8" stroke="#f472b6" stroke-width="3" />
+          <line x1="25" y1="25" x2="25" y2="75" stroke="#f472b6" stroke-width="3" />
+          <line x1="55" y1="25" x2="55" y2="75" stroke="#f472b6" stroke-width="3" />
+          <line x1="85" y1="25" x2="85" y2="75" stroke="#f472b6" stroke-width="3" />
+        </g>
+        <g transform="translate(645, 235)">
+          <rect x="0" y="28" width="44" height="27" rx="4" fill="#f9a8d4" />
+          <path d="M4,28 Q22,-4 40,28 Z" fill="#fde047" />
+          <circle id="nightlightGlow" cx="22" cy="16" r="32" fill="rgba(253, 224, 71, 0)" />
         </g>
       </g>
 
-      <g id="arielGroup" transform="translate(265, 165)" style="transition: transform 0.8s ease;">
+      <!-- Royal Garden Background -->
+      <g id="gardenBg" style="display:none;">
+        <rect x="0" y="285" width="800" height="85" fill="#4ade80" />
+        <circle cx="140" cy="270" r="24" fill="#f43f5e" />
+        <circle cx="650" cy="270" r="24" fill="#fb7185" />
+        <ellipse cx="400" cy="300" rx="90" ry="22" fill="#93c5fd" stroke="#e2e8f0" stroke-width="4" />
+      </g>
+
+      <!-- Sea Friends -->
+      <g id="seaFriendsGroup">
+        <g transform="translate(120, 200)">
+          <ellipse cx="0" cy="0" rx="26" ry="13" fill="#38bdf8" />
+          <polygon points="-24,0 -38,-10 -34,0 -38,10" fill="#0284c7" />
+          <circle cx="14" cy="-3" r="2.5" fill="#0f172a" />
+          <text x="0" y="26" text-anchor="middle" fill="#e0f2fe" font-size="11" font-weight="700">Dolphin</text>
+        </g>
+        <g transform="translate(110, 270)">
+          <circle cx="0" cy="-12" r="8" fill="#f472b6" />
+          <path d="M-4,-6 Q8,8 -2,22" stroke="#ec4899" stroke-width="7" fill="none" stroke-linecap="round" />
+          <circle cx="3" cy="-13" r="2" fill="#0f172a" />
+          <text x="0" y="36" text-anchor="middle" fill="#fce7f3" font-size="11" font-weight="700">Seahorse</text>
+        </g>
+        <g transform="translate(665, 275)">
+          <ellipse cx="0" cy="0" rx="20" ry="12" fill="#10b981" />
+          <circle cx="-22" cy="0" r="7" fill="#34d399" />
+          <circle cx="-24" cy="-2" r="2" fill="#0f172a" />
+          <text x="0" y="24" text-anchor="middle" fill="#d1fae5" font-size="11" font-weight="700">Turtle</text>
+        </g>
+        <g transform="translate(185, 285)">
+          <polygon points="0,-14 4,-4 14,-4 6,3 9,13 0,7 -9,13 -6,3 -14,-4 -4,-4" fill="#fbbf24" />
+          <text x="0" y="25" text-anchor="middle" fill="#fef08a" font-size="11" font-weight="700">Starfish</text>
+        </g>
+      </g>
+
+      <!-- Tea Party Table (Hidden until Tea Party pressed) -->
+      <g id="teaPartyTable" transform="translate(340, 245)" style="display:none;">
+        <ellipse cx="0" cy="0" rx="46" ry="14" fill="#fbcfe8" stroke="#f472b6" stroke-width="2.5" />
+        <rect x="-6" y="12" width="12" height="24" fill="#f9a8d4" />
+        <circle cx="-16" cy="-4" r="6" fill="#fef08a" />
+        <circle cx="14" cy="-4" r="5" fill="#ffffff" />
+      </g>
+
+      <!-- ARIEL -->
+      <g id="arielGroup" transform="translate(260, 185)" style="transition: transform 0.9s ease-in-out, opacity 0.9s ease;">
         <path d="M-28,-38 C-48,-72 15,-85 24,-45 C28,-25 18,-5 5,8 C-15,5 -28,-15 -28,-38 Z" fill="#ef233c" />
         <circle cx="4" cy="-38" r="17" fill="#ffdab9" />
-        <circle cx="10" cy="-40" r="2.3" fill="#1f2937" />
+        <g id="arielEyesOpen">
+          <circle cx="10" cy="-40" r="3" fill="#ffffff" />
+          <circle cx="10.5" cy="-40" r="1.9" fill="#0f172a" />
+        </g>
+        <g id="arielEyesClosed" style="display:none;">
+          <path d="M7,-39 Q10,-36 14,-39" stroke="#1f2937" stroke-width="2" fill="none" />
+        </g>
         <circle cx="8" cy="-34" r="3.5" fill="#f472b6" opacity="0.65" />
+        <path id="arielMadBrow" d="M5,-47 L15,-43" stroke="#7f1d1d" stroke-width="2.5" stroke-linecap="round" style="display:none;" />
         <path id="arielMouth" d="M6,-30 Q11,-27 15,-30" stroke="#1f2937" stroke-width="2" fill="none" stroke-linecap="round" />
-        <path id="arielMadBrow" d="M5,-46 L15,-43" stroke="#7f1d1d" stroke-width="2.5" stroke-linecap="round" style="display:none;" />
         <rect x="-13" y="-20" width="32" height="22" rx="8" fill="#9333ea" />
-        <path id="arielTail" d="M-13,2 L19,2 C22,35 12,68 -8,95 C-12,68 -16,35 -13,2 Z" fill="#14b8a6" stroke="#0f766e" stroke-width="2" />
+        <path id="arielOutfit" d="M-13,2 L19,2 C22,35 12,68 -8,95 C-12,68 -16,35 -13,2 Z" fill="#14b8a6" stroke="#0f766e" stroke-width="2" />
         <text x="3" y="24" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">Ariel</text>
       </g>
 
-      <g id="melodyGroup" transform="translate(415, 185)" style="transition: transform 0.8s ease;">
-        <path d="M-18,-6 L18,-6 L28,48 L-28,48 Z" fill="#ec4899" />
+      <!-- BABY MELODY -->
+      <g id="melodyGroup" transform="translate(400, 208)" style="transition: transform 0.8s ease;">
+        <path id="melodyOutfit" d="M-18,-6 L18,-6 L28,48 L-28,48 Z" fill="#ec4899" />
         <circle cx="0" cy="10" r="5" fill="#facc15" stroke="#ca8a04" stroke-width="1.5" />
         <circle cx="0" cy="-26" r="21" fill="#ffdab9" />
         <polygon points="-8,-46 0,-56 8,-46" fill="#f472b6" />
         <g id="melodyEyesOpen">
-          <circle cx="-7" cy="-28" r="2.6" fill="#1f2937" />
-          <circle cx="7" cy="-28" r="2.6" fill="#1f2937" />
+          <circle cx="-7" cy="-28" r="3.5" fill="#ffffff" />
+          <circle cx="-7" cy="-28" r="2.2" fill="#0f172a" />
+          <circle cx="7" cy="-28" r="3.5" fill="#ffffff" />
+          <circle cx="7" cy="-28" r="2.2" fill="#0f172a" />
         </g>
         <g id="melodyEyesClosed" style="display:none;">
           <path d="M-11,-27 Q-7,-23 -3,-27" stroke="#1f2937" stroke-width="2.2" fill="none" />
           <path d="M3,-27 Q7,-23 11,-27" stroke="#1f2937" stroke-width="2.2" fill="none" />
+        </g>
+        <g id="melodyMadBrows" style="display:none;">
+          <path d="M-12,-35 L-3,-31" stroke="#7f1d1d" stroke-width="2.5" stroke-linecap="round" />
+          <path d="M12,-35 L3,-31" stroke="#7f1d1d" stroke-width="2.5" stroke-linecap="round" />
         </g>
         <circle cx="-12" cy="-22" r="4" fill="#f472b6" opacity="0.65" />
         <circle cx="12" cy="-22" r="4" fill="#f472b6" opacity="0.65" />
         <path id="melodySmile" d="M-5,-18 Q0,-13 5,-18" stroke="#1f2937" stroke-width="2.2" fill="none" stroke-linecap="round" />
         <ellipse id="melodyCryMouth" cx="0" cy="-16" rx="5" ry="6" fill="#be123c" style="display:none;" />
         <g id="melodyTears" style="display:none;">
-          <circle cx="-9" cy="-19" r="3" fill="#38bdf8" />
-          <circle cx="9" cy="-19" r="3" fill="#38bdf8" />
-          <circle cx="-11" cy="-10" r="2.5" fill="#38bdf8" />
-          <circle cx="11" cy="-10" r="2.5" fill="#38bdf8" />
+          <circle cx="-9" cy="-19" r="3.2" fill="#38bdf8" />
+          <circle cx="9" cy="-19" r="3.2" fill="#38bdf8" />
+          <circle cx="-11" cy="-10" r="2.6" fill="#38bdf8" />
+          <circle cx="11" cy="-10" r="2.6" fill="#38bdf8" />
         </g>
         <text x="0" y="68" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">Baby Melody ✨</text>
+      </g>
+
+      <!-- MORGANA & DANGER ANIMALS -->
+      <g id="morganaGroup" transform="translate(535, 185)" style="display:none;">
+        <path d="M-24,-35 C-35,-65 25,-65 24,-35 Z" fill="#e2e8f0" />
+        <circle cx="0" cy="-32" r="16" fill="#86efac" />
+        <circle cx="-5" cy="-34" r="2.3" fill="#0f172a" />
+        <circle cx="5" cy="-34" r="2.3" fill="#0f172a" />
+        <path d="M-16,-14 L16,-14 L26,55 L-26,55 Z" fill="#1e1b4b" />
+        <text x="0" y="72" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="800">Morgana & Danger</text>
+        <path d="M-85,40 C-55,15 -15,15 15,40 L35,24 L28,40 L35,56 L15,40 C-15,58 -55,58 -85,40 Z" fill="#64748b" />
+        <path d="M-70,72 Q-45,58 -20,72 T30,72" stroke="#facc15" stroke-width="5" fill="none" stroke-linecap="round" />
+      </g>
+
+      <!-- SHARK IN CENTER MIDDLE -->
+      <g id="sharkGroup" transform="translate(480, 205)" style="display:none;">
+        <path d="M-55,0 C-25,-28 25,-28 55,0 L78,-18 L70,0 L78,18 L55,0 C25,22 -25,22 -55,0 Z" fill="#64748b" />
+        <polygon points="-10,-18 6,-42 18,-16" fill="#475569" />
+        <circle cx="-32" cy="-5" r="3.5" fill="#ffffff" />
+        <circle cx="-33" cy="-5" r="1.8" fill="#0f172a" />
       </g>
     </svg>
     <div class="night-overlay"></div>
@@ -165,8 +273,8 @@
       <div id="moodText" class="status-val mood-happy">HAPPY ✨</div>
     </div>
     <div>
-      <div class="status-label">Happiness Level</div>
-      <div id="happyText" class="status-val">80.0%</div>
+      <div class="status-label">Happiness Level: <span id="happyText">80.0%</span></div>
+      <div class="happy-meter-wrap"><div id="happyFill" class="happy-meter-fill"></div></div>
     </div>
     <div>
       <div class="status-label">Active Area</div>
@@ -176,29 +284,27 @@
 
   <div class="controls">
     <div class="row">
-      <span class="row-title">Location & Lights:</span>
-      <button id="btnNursery" class="pill" onclick="setLocation('nursery')">🏰 Palace Nursery</button>
-      <button id="btnOcean" class="pill active-blue" onclick="setLocation('ocean')">🌊 Coral Ocean</button>
-      <button id="btnDarkToggle" class="pill indigo" onclick="toggleLights()">🌙 Lights Off (Sleep Mode)</button>
+      <span class="row-title">Story & Separation:</span>
+      <button class="pill coral" onclick="arielSwimCastle()">🧜‍♀️ Ariel Swim Back to Castle (Melody Left Alone)</button>
+      <button class="pill red" onclick="arielMadAtMelody()">😠 Ariel Mad at Melody (Melody Cries!)</button>
+      <button class="pill pink" onclick="reunionHug()">🤗 Reunion Hug!</button>
+      <button class="pill purple" onclick="sneakToGarden()">🤫 Sneak Out to Garden</button>
     </div>
 
     <div class="row">
-      <button class="pill coral" onclick="arielSwimCastle()">🧜‍♀️ Ariel Swim Back to Castle</button>
-      <button class="pill blue" onclick="melodyFollowAriel()">🫧 Melody Follow Ariel</button>
-      <button class="pill red" onclick="arielMad()">😠 Ariel Mad / Stern</button>
-      <button class="pill pink" onclick="makeUpHug()">🤗 Make Up Hug</button>
-    </div>
-
-    <div class="row">
-      <span class="row-title">Melody Action:</span>
-      <button class="pill" onclick="swimAway()">🏊‍♀️ Swim Away</button>
-      <button class="pill blue" onclick="catchMelody()">💞 Catch Melody</button>
-      <button class="pill red" onclick="makeCry()">😭 Make Cry</button>
+      <span class="row-title">Danger & Sea Fun:</span>
+      <button class="pill red" onclick="morganaDanger()">🐙 Morgana & Danger Animals!</button>
+      <button class="pill emerald" onclick="removeMorgana()">🚫 Remove Morgana & Danger</button>
+      <button class="pill" onclick="sharkAppears()">🦈 Shark Appears!</button>
+      <button class="pill blue" onclick="teaParty()">🫖 Royal Seashell Tea Party!</button>
+      <button class="pill purple" onclick="toggleWardrobe()">👗 Wardrobe Switcher</button>
     </div>
 
     <div class="panel">
-      <div class="panel-title">Melody Care & Soothing Actions (Reduces Crying)</div>
+      <div class="panel-title">Melody Care & Play Actions (Pure Sound Effects When Unmuted — Zero Talking)</div>
       <div class="row">
+        <button class="pill blue" onclick="playAction('tickle')">🤭 Tickle Tummy!</button>
+        <button class="pill blue" onclick="playAction('peekaboo')">🙈 Peek-a-Boo!</button>
         <button class="pill pink" onclick="careAction('nurse')">🤱 Nurse / Breastfeed</button>
         <button class="pill" onclick="careAction('biscuit')">🍪 Biscuit Snack</button>
         <button class="pill" onclick="careAction('bottle')">🍼 Milk Bottle</button>
@@ -206,12 +312,13 @@
         <button class="pill" onclick="careAction('lullaby')">🎵 Lullaby Song</button>
         <button class="pill" onclick="careAction('bath')">🛁 Bubble Bath</button>
         <button class="pill indigo" onclick="sleepMelody()">🛌 Sleep (Dims Lights)</button>
+        <button class="pill red" onclick="makeCry()">😭 Make Cry</button>
       </div>
     </div>
 
     <div class="panel">
-      <div class="panel-title">Character Call & Return (Ariel & Baby Melody Only)</div>
-      <div class="grid-2">
+      <div class="panel-title">Character Call & Return</div>
+      <div class="grid-4">
         <div class="char-card">
           <div class="char-name">🧜‍♀️ Ariel</div>
           <div class="char-btns">
@@ -226,39 +333,70 @@
             <button class="btn-return" onclick="setCharVisible('melody', false)">Return</button>
           </div>
         </div>
+        <div class="char-card">
+          <div class="char-name">🐬 Sea Friends</div>
+          <div class="char-btns">
+            <button class="btn-call" onclick="setCharVisible('friends', true)">Call</button>
+            <button class="btn-return" onclick="setCharVisible('friends', false)">Return</button>
+          </div>
+        </div>
+        <div class="char-card">
+          <div class="char-name">🐙 Morgana</div>
+          <div class="char-btns">
+            <button class="btn-call" onclick="setCharVisible('morgana', true)">Call</button>
+            <button class="btn-return" onclick="setCharVisible('morgana', false)">Return</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  let state = {
+  var state = {
     location: 'ocean',
     lightsOff: false,
-    soundOn: true,
+    soundOn: false,
+    musicPlaying: true,
+    dressMode: false,
+    teaPartyActive: false,
     mood: 'happy',
     happiness: 80,
     arielPresent: true,
     melodyPresent: true,
+    friendsPresent: true,
+    morganaPresent: false,
+    sharkPresent: false,
     arielMad: false
   };
 
-  let audioCtx = null;
+  var audioCtx = null;
+  var musicTimer = null;
 
   function initAudio() {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
+    if (!audioCtx) {
+      var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioContextClass) audioCtx = new AudioContextClass();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
   }
 
-  function playTone(freq, duration, type = 'sine', slideTo = null) {
+  function playTone(freq, duration, type, slideTo, vol) {
     if (!state.soundOn) return;
     initAudio();
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
+    if (!audioCtx) return;
+    type = type || 'sine';
+    vol = vol || 0.18;
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
     osc.type = type;
     osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-    if (slideTo) osc.frequency.exponentialRampToValueAtTime(slideTo, audioCtx.currentTime + duration);
-    gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+    if (slideTo) {
+      osc.frequency.exponentialRampToValueAtTime(slideTo, audioCtx.currentTime + duration);
+    }
+    gain.gain.setValueAtTime(vol, audioCtx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
     osc.connect(gain);
     gain.connect(audioCtx.destination);
@@ -266,67 +404,86 @@
     osc.stop(audioCtx.currentTime + duration);
   }
 
+  function startHappyMusic() {
+    if (musicTimer) clearInterval(musicTimer);
+    var happyNotes = [523.25, 659.25, 783.99, 1046.5, 783.99, 659.25, 587.33, 698.46, 880, 698.46];
+    var step = 0;
+    musicTimer = setInterval(function() {
+      if (state.soundOn && state.musicPlaying) {
+        playTone(happyNotes[step % happyNotes.length], 0.22, 'sine', null, 0.06);
+        step++;
+      }
+    }, 340);
+  }
+
   function playCrySound() {
-    playTone(620, 0.35, 'triangle', 420);
-    setTimeout(() => playTone(660, 0.45, 'triangle', 390), 380);
-    if ('speechSynthesis' in window && state.soundOn) {
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance("Mama! Want Mama!");
-      u.pitch = 2.0;
-      u.rate = 1.15;
-      window.speechSynthesis.speak(u);
-    }
+    playTone(650, 0.35, 'triangle', 410, 0.22);
+    setTimeout(function() { playTone(690, 0.45, 'triangle', 380, 0.22); }, 380);
   }
 
-  function playLullaby() {
-    const notes = [523.25, 659.25, 783.99, 659.25, 587.33, 523.25];
-    notes.forEach((n, i) => setTimeout(() => playTone(n, 0.35, 'sine'), i * 320));
+  function playGiggleSound() {
+    var notes = [660, 880, 784, 1046];
+    notes.forEach(function(f, i) {
+      setTimeout(function() { playTone(f, 0.12, 'sine', null, 0.18); }, i * 110);
+    });
   }
 
-  function spawnFX(emoji, x = 400, y = 160) {
-    const stage = document.getElementById('stage');
-    const el = document.createElement('div');
+  function spawnFX(emoji, x, y) {
+    x = x || 400;
+    y = y || 160;
+    var stage = document.getElementById('stage');
+    var el = document.createElement('div');
     el.className = 'floating-fx';
     el.textContent = emoji;
     el.style.left = x + 'px';
     el.style.top = y + 'px';
     stage.appendChild(el);
-    setTimeout(() => el.remove(), 1600);
+    setTimeout(function() { el.remove(); }, 1600);
   }
 
   function updateUI() {
-    const stage = document.getElementById('stage');
-    stage.className = `stage ${state.location} ${state.lightsOff ? 'lights-off' : ''}`;
+    var stage = document.getElementById('stage');
+    stage.className = 'stage ' + state.location + (state.lightsOff ? ' lights-off' : '');
 
     document.getElementById('oceanBg').style.display = state.location === 'ocean' ? 'block' : 'none';
     document.getElementById('nurseryBg').style.display = state.location === 'nursery' ? 'block' : 'none';
+    document.getElementById('gardenBg').style.display = state.location === 'garden' ? 'block' : 'none';
     document.getElementById('nightSky').setAttribute('opacity', state.lightsOff ? '1' : '0');
-    document.getElementById('nightlightGlow').setAttribute('fill', state.lightsOff ? 'rgba(253, 224, 71, 0.35)' : 'rgba(253, 224, 71, 0)');
 
-    document.getElementById('btnOcean').className = `pill ${state.location === 'ocean' ? 'active-blue' : ''}`;
-    document.getElementById('btnNursery').className = `pill ${state.location === 'nursery' ? 'active-blue' : ''}`;
-    document.getElementById('btnDarkToggle').textContent = state.lightsOff ? '☀️ Lights On' : '🌙 Lights Off (Sleep Mode)';
+    var glow = document.getElementById('nightlightGlow');
+    if (glow) glow.setAttribute('fill', state.lightsOff ? 'rgba(253, 224, 71, 0.45)' : 'rgba(253, 224, 71, 0)');
+
+    document.getElementById('topOceanBtn').className = 'pill' + (state.location === 'ocean' ? ' active-blue' : '');
+    document.getElementById('topNurseryBtn').className = 'pill' + (state.location === 'nursery' ? ' active-blue' : '');
+    document.getElementById('topGardenBtn').className = 'pill' + (state.location === 'garden' ? ' active-blue' : '');
     document.getElementById('lightsBtn').textContent = state.lightsOff ? '☀️' : '🌙';
     document.getElementById('soundBtn').textContent = state.soundOn ? '🔊' : '🔇';
+    document.getElementById('musicBtn').style.opacity = state.musicPlaying ? '1' : '0.45';
 
     document.getElementById('arielGroup').style.display = state.arielPresent ? 'block' : 'none';
     document.getElementById('melodyGroup').style.display = state.melodyPresent ? 'block' : 'none';
+    document.getElementById('seaFriendsGroup').style.display = state.friendsPresent ? 'block' : 'none';
+    document.getElementById('morganaGroup').style.display = state.morganaPresent ? 'block' : 'none';
+    document.getElementById('sharkGroup').style.display = state.sharkPresent ? 'block' : 'none';
+    document.getElementById('teaPartyTable').style.display = state.teaPartyActive ? 'block' : 'none';
 
     document.getElementById('arielMadBrow').style.display = state.arielMad ? 'block' : 'none';
-    document.getElementById('arielMouth').setAttribute('d', state.arielMad ? 'M6,-28 Q11,-32 15,-28' : 'M6,-30 Q11,-27 15,-30');
+    document.getElementById('arielMouth').setAttribute('d', state.arielMad ? 'M6,-28 Q11,-33 15,-28' : 'M6,-30 Q11,-27 15,-30');
 
-    const isCrying = state.mood === 'crying' && state.melodyPresent;
-    const isSleeping = state.mood === 'sleeping' && state.melodyPresent;
+    var isCrying = state.mood === 'crying' && state.melodyPresent;
+    var isSleeping = state.mood === 'sleeping' && state.melodyPresent;
     document.getElementById('speechBubble').style.display = isCrying ? 'block' : 'none';
     document.getElementById('melodyCryMouth').style.display = isCrying ? 'block' : 'none';
     document.getElementById('melodyTears').style.display = isCrying ? 'block' : 'none';
     document.getElementById('melodySmile').style.display = isCrying ? 'none' : 'block';
     document.getElementById('melodyEyesOpen').style.display = isSleeping ? 'none' : 'block';
     document.getElementById('melodyEyesClosed').style.display = isSleeping ? 'block' : 'none';
+    document.getElementById('arielEyesOpen').style.display = isSleeping ? 'none' : 'block';
+    document.getElementById('arielEyesClosed').style.display = isSleeping ? 'block' : 'none';
 
-    const moodEl = document.getElementById('moodText');
+    var moodEl = document.getElementById('moodText');
     if (state.mood === 'crying') {
-      moodEl.textContent = 'CRYING 😭';
+      moodEl.textContent = 'CRYING ALONE 😭';
       moodEl.className = 'status-val mood-crying';
     } else if (state.mood === 'sleeping') {
       moodEl.textContent = 'SLEEPING 😴';
@@ -335,13 +492,18 @@
       moodEl.textContent = 'HAPPY ✨';
       moodEl.className = 'status-val mood-happy';
     }
+
     document.getElementById('happyText').textContent = state.happiness.toFixed(1) + '%';
-    document.getElementById('areaText').textContent = state.location === 'ocean' ? '🌊 Coral Ocean' : '🏰 Palace Nursery';
+    document.getElementById('happyFill').style.width = state.happiness + '%';
+    document.getElementById('areaText').textContent =
+      state.location === 'ocean' ? '🌊 Coral Ocean' :
+      state.location === 'nursery' ? '🏰 Palace Nursery' : '🌸 Royal Garden';
   }
 
   function setLocation(loc) {
     state.location = loc;
-    playTone(520, 0.2, 'sine', 680);
+    if (loc !== 'ocean') state.sharkPresent = false;
+    playTone(540, 0.2, 'sine', 720);
     updateUI();
   }
 
@@ -353,7 +515,24 @@
 
   function toggleSound() {
     state.soundOn = !state.soundOn;
-    if (state.soundOn) playTone(660, 0.2, 'sine');
+    if (state.soundOn) {
+      initAudio();
+      playTone(660, 0.2, 'sine');
+    }
+    updateUI();
+  }
+
+  function toggleMusic() {
+    state.musicPlaying = !state.musicPlaying;
+    updateUI();
+  }
+
+  function toggleWardrobe() {
+    state.dressMode = !state.dressMode;
+    document.getElementById('arielOutfit').setAttribute('fill', state.dressMode ? '#f472b6' : '#14b8a6');
+    document.getElementById('melodyOutfit').setAttribute('fill', state.dressMode ? '#fde047' : '#ec4899');
+    spawnFX('👗', 330, 140);
+    playGiggleSound();
     updateUI();
   }
 
@@ -361,82 +540,149 @@
     if (char === 'ariel') {
       state.arielPresent = visible;
       if (visible) {
-        document.getElementById('arielGroup').setAttribute('transform', 'translate(265, 165)');
+        var el = document.getElementById('arielGroup');
+        el.style.opacity = '1';
+        el.setAttribute('transform', 'translate(260, 185) scale(1)');
         state.arielMad = false;
       }
-    } else {
+    } else if (char === 'melody') {
       state.melodyPresent = visible;
-      if (visible) document.getElementById('melodyGroup').setAttribute('transform', 'translate(415, 185)');
+      if (visible) document.getElementById('melodyGroup').setAttribute('transform', 'translate(400, 208)');
+    } else if (char === 'friends') {
+      state.friendsPresent = visible;
+    } else if (char === 'morgana') {
+      state.morganaPresent = visible;
     }
     playTone(visible ? 580 : 360, 0.2);
     updateUI();
   }
 
   function arielSwimCastle() {
+    state.location = 'ocean';
     state.arielPresent = true;
+    state.melodyPresent = true;
     state.arielMad = false;
-    const ariel = document.getElementById('arielGroup');
-    ariel.setAttribute('transform', 'translate(580, 75) scale(0.55)');
-    playTone(600, 0.4, 'sine', 350);
-    setTimeout(() => {
+    state.teaPartyActive = false;
+    var arielEl = document.getElementById('arielGroup');
+    var melodyEl = document.getElementById('melodyGroup');
+
+    melodyEl.setAttribute('transform', 'translate(400, 208)');
+    arielEl.style.opacity = '1';
+    arielEl.setAttribute('transform', 'translate(645, 92) scale(0.22)');
+    playTone(620, 0.45, 'sine', 340);
+
+    setTimeout(function() {
+      arielEl.style.opacity = '0';
       state.arielPresent = false;
       makeCry();
     }, 900);
     updateUI();
   }
 
-  function melodyFollowAriel() {
-    state.melodyPresent = true;
-    document.getElementById('melodyGroup').setAttribute('transform', 'translate(540, 120)');
-    spawnFX('🫧', 480, 160);
-    makeCry();
-  }
-
-  function arielMad() {
+  function arielMadAtMelody() {
     state.arielPresent = true;
+    state.melodyPresent = true;
     state.arielMad = true;
-    document.getElementById('arielGroup').setAttribute('transform', 'translate(310, 165)');
+    var arielEl = document.getElementById('arielGroup');
+    arielEl.style.opacity = '1';
+    arielEl.setAttribute('transform', 'translate(310, 185) scale(1)');
+    document.getElementById('melodyGroup').setAttribute('transform', 'translate(400, 208)');
     makeCry();
   }
 
-  function makeUpHug() {
+  function reunionHug() {
     state.arielPresent = true;
     state.melodyPresent = true;
     state.arielMad = false;
+    state.morganaPresent = false;
+    state.sharkPresent = false;
     state.mood = 'happy';
     state.happiness = Math.min(100, state.happiness + 25);
-    document.getElementById('arielGroup').setAttribute('transform', 'translate(345, 165)');
-    document.getElementById('melodyGroup').setAttribute('transform', 'translate(390, 185)');
-    spawnFX('💖', 365, 130);
-    playLullaby();
+    var arielEl = document.getElementById('arielGroup');
+    arielEl.style.opacity = '1';
+    arielEl.setAttribute('transform', 'translate(335, 185) scale(1)');
+    document.getElementById('melodyGroup').setAttribute('transform', 'translate(390, 208)');
+    spawnFX('💖', 360, 130);
+    playGiggleSound();
     updateUI();
   }
 
-  function swimAway() {
+  function sneakToGarden() {
+    state.location = 'garden';
     state.melodyPresent = true;
-    document.getElementById('melodyGroup').setAttribute('transform', 'translate(640, 175)');
-    spawnFX('🫧', 560, 180);
-    playTone(440, 0.3, 'sine', 740);
+    state.arielPresent = false;
+    state.teaPartyActive = false;
+    document.getElementById('melodyGroup').setAttribute('transform', 'translate(400, 208)');
+    spawnFX('🦋', 400, 130);
+    playGiggleSound();
     updateUI();
   }
 
-  function catchMelody() {
+  function morganaDanger() {
+    state.location = 'ocean';
+    state.morganaPresent = true;
+    state.melodyPresent = true;
+    state.teaPartyActive = false;
+    makeCry();
+  }
+
+  function removeMorgana() {
+    state.morganaPresent = false;
+    state.sharkPresent = false;
+    state.mood = 'happy';
+    state.happiness = Math.min(100, state.happiness + 15);
+    spawnFX('✨', 520, 160);
+    playGiggleSound();
+    updateUI();
+  }
+
+  function sharkAppears() {
+    state.location = 'ocean';
+    state.sharkPresent = true;
+    state.melodyPresent = true;
+    state.teaPartyActive = false;
+    makeCry();
+  }
+
+  function teaParty() {
     state.arielPresent = true;
     state.melodyPresent = true;
+    state.morganaPresent = false;
+    state.sharkPresent = false;
     state.arielMad = false;
+    state.teaPartyActive = true;
     state.mood = 'happy';
-    document.getElementById('arielGroup').setAttribute('transform', 'translate(320, 165)');
-    document.getElementById('melodyGroup').setAttribute('transform', 'translate(405, 185)');
-    spawnFX('✨', 380, 140);
-    playTone(520, 0.25, 'sine', 780);
+    state.happiness = Math.min(100, state.happiness + 20);
+    var arielEl = document.getElementById('arielGroup');
+    arielEl.style.opacity = '1';
+    arielEl.setAttribute('transform', 'translate(275, 185) scale(1)');
+    document.getElementById('melodyGroup').setAttribute('transform', 'translate(410, 208)');
+    spawnFX('🫖', 340, 145);
+    spawnFX('🧁', 430, 150);
+    playGiggleSound();
     updateUI();
   }
 
   function makeCry() {
     state.melodyPresent = true;
     state.mood = 'crying';
-    state.happiness = Math.max(5, state.happiness - 30);
+    state.happiness = Math.max(5, state.happiness - 25);
     playCrySound();
+    updateUI();
+  }
+
+  function playAction(type) {
+    state.arielPresent = true;
+    state.melodyPresent = true;
+    state.arielMad = false;
+    state.mood = 'happy';
+    state.happiness = Math.min(100, state.happiness + 15);
+    var arielEl = document.getElementById('arielGroup');
+    arielEl.style.opacity = '1';
+    arielEl.setAttribute('transform', 'translate(320, 185) scale(1)');
+    document.getElementById('melodyGroup').setAttribute('transform', 'translate(395, 208)');
+    spawnFX(type === 'tickle' ? '😆' : '🙈', 370, 135);
+    playGiggleSound();
     updateUI();
   }
 
@@ -447,20 +693,17 @@
     if (type === 'nurse') {
       state.arielPresent = true;
       state.arielMad = false;
-      document.getElementById('arielGroup').setAttribute('transform', 'translate(350, 165)');
-      document.getElementById('melodyGroup').setAttribute('transform', 'translate(382, 182)');
-      spawnFX('💗', 365, 135);
-      playLullaby();
-    } else if (type === 'lullaby') {
-      spawnFX('🎵', 410, 130);
-      playLullaby();
+      var arielEl = document.getElementById('arielGroup');
+      arielEl.style.opacity = '1';
+      arielEl.setAttribute('transform', 'translate(335, 185) scale(1)');
+      document.getElementById('melodyGroup').setAttribute('transform', 'translate(378, 205)');
+      spawnFX('💗', 360, 135);
     } else if (type === 'bath') {
-      spawnFX('🫧', 410, 140);
-      playTone(500, 0.3, 'sine', 800);
+      spawnFX('🫧', 400, 140);
     } else {
-      spawnFX('🍪', 410, 140);
-      playTone(620, 0.2, 'triangle', 740);
+      spawnFX('🍪', 400, 140);
     }
+    playGiggleSound();
     updateUI();
   }
 
@@ -468,11 +711,11 @@
     state.melodyPresent = true;
     state.mood = 'sleeping';
     state.lightsOff = true;
-    spawnFX('💤', 415, 130);
-    playLullaby();
+    spawnFX('💤', 400, 135);
     updateUI();
   }
 
+  startHappyMusic();
   updateUI();
 </script>
 </body>
